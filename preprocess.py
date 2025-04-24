@@ -27,8 +27,8 @@ def preprocess_input(df):
   df['LOS']=(df['DischargeDt']-df['AdmissionDt']).dt.days
   df['LOS'].fillna(0,inplace=True)
   df.drop(['AdmissionDt','DischargeDt'],axis=1,inplace=True)
-  # encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1']
-  encoding_cols=['Provider','BeneID','AttendingPhysician']
+  encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1']
+  # encoding_cols=['Provider','BeneID','AttendingPhysician']
   df[encoding_cols]=encoder.transform(df[encoding_cols])
   
   return df
