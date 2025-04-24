@@ -30,13 +30,13 @@ else:
 
     # Example fields (you can customize this based on your actual columns)
     provider = st.text_input("Enter ProviderID")
-    beneficiar = st.text_input("Enter BeneficierID")
-    amt_reimbursed = st.number_input("Enter claim anount re-imbursed")
+    beneficiar = st.text_input("Enter BeneficiaryID")
+    amt_reimbursed = st.number_input("Enter claim amount reimbursed")
     phyID = st.text_input("Enter PhysicianID")
-    Gender = st.number_input("Enter Gender(1-Male,2-Female)")
-    Race = st.number_input("Enter Race(1-4)")
+    Gender = st.number_input("Enter Gender (1-Male, 2-Female)")
+    Race = st.number_input("Enter Race (1-4)")
     State = st.number_input("Enter State number")
-    county = st.number_input("Enter county Number")
+    county = st.number_input("Enter County Number")
     ClaimStartDt = st.text_input("Enter ClaimStartDt")
     ClaimEndDt = st.text_input("Enter ClaimEndDt")
     AdmissionDt = st.text_input("Enter AdmissionDt")
@@ -47,39 +47,42 @@ else:
     DeductibleAmtPaid = st.number_input("Enter DeductibleAmtPaid")
     ClmDiagnosisCode_1 = st.number_input("Enter ClmDiagnosisCode_1")
 
-   # Assemble input into DataFrame
-manual_input = pd.DataFrame({
-    'Provider': [provider],
-    'BeneficiaryID': [beneficiar],
-    'Claim_Reimbursed': [amt_reimbursed],
-    'PhysicianID': [phyID],
-    'Gender': [Gender],
-    'Race': [Race],
-    'State': [State],
-    'County': [county],
-    'ClaimStartDt': [ClaimStartDt],
-    'ClaimEndDt': [ClaimEndDt],
-    'AdmissionDt': [AdmissionDt],
-    'DischargeDt': [DischargeDt],
-    'DOB': [DOB],
-    'Claim_Duration': [claim_duration],
-    'RenalDiseaseIndicator': [RenalDiseaseIndicator],
-    'DiagnosisGroupCode': [DiagnosisGroupCode],
-    'DeductibleAmtPaid': [DeductibleAmtPaid],
-    'ClmDiagnosisCode_1': [ClmDiagnosisCode_1]
-# default 
-    'ChronicCond_Alzheimer': [0],
-    'ChronicCond_Heartfailure': [0],
-    'ChronicCond_KidneyDisease': [0],
-    'ChronicCond_Cancer': [0],
-    'ChronicCond_ObstrPulmonary': [0],
-    'ChronicCond_Depression': [0],
-    'ChronicCond_Diabetes': [0],
-    'ChronicCond_IschemicHeart': [0],
-    'ChronicCond_Osteoporasis': [0],
-    'ChronicCond_rheumatoidarthritis': [0],
-    'ChronicCond_stroke': [0],
-})
+    # Dummy claim_duration until computed in preprocess
+    claim_duration = 0  
+
+    # Assemble input into DataFrame
+    manual_input = pd.DataFrame({
+        'Provider': [provider],
+        'BeneficiaryID': [beneficiar],
+        'Claim_Reimbursed': [amt_reimbursed],
+        'PhysicianID': [phyID],
+        'Gender': [Gender],
+        'Race': [Race],
+        'State': [State],
+        'County': [county],
+        'ClaimStartDt': [ClaimStartDt],
+        'ClaimEndDt': [ClaimEndDt],
+        'AdmissionDt': [AdmissionDt],
+        'DischargeDt': [DischargeDt],
+        'DOB': [DOB],
+        'Claim_Duration': [claim_duration],
+        'RenalDiseaseIndicator': [RenalDiseaseIndicator],
+        'DiagnosisGroupCode': [DiagnosisGroupCode],
+        'DeductibleAmtPaid': [DeductibleAmtPaid],
+        'ClmDiagnosisCode_1': [ClmDiagnosisCode_1],
+        # Default values for chronic conditions
+        'ChronicCond_Alzheimer': [0],
+        'ChronicCond_Heartfailure': [0],
+        'ChronicCond_KidneyDisease': [0],
+        'ChronicCond_Cancer': [0],
+        'ChronicCond_ObstrPulmonary': [0],
+        'ChronicCond_Depression': [0],
+        'ChronicCond_Diabetes': [0],
+        'ChronicCond_IschemicHeart': [0],
+        'ChronicCond_Osteoporasis': [0],
+        'ChronicCond_rheumatoidarthritis': [0],
+        'ChronicCond_stroke': [0],
+    })
 
     st.write("Input Summary:", manual_input)
 
