@@ -27,9 +27,22 @@ def preprocess_input(df):
   df['LOS']=(df['DischargeDt']-df['AdmissionDt']).dt.days
   df['LOS'].fillna(0,inplace=True)
   df.drop(['AdmissionDt','DischargeDt'],axis=1,inplace=True)
-  encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1']
+  # encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1']
   # encoding_cols=['Provider','BeneID','AttendingPhysician']
-  df[encoding_cols]=encoder.transform(df[encoding_cols])
+  # df[encoding_cols]=encoder.transform(df[encoding_cols])
+  encoding_cols = ['Provider', 'BeneID', 'AttendingPhysician', 'ClmDiagnosisCode_1']
+
+# Ensure all encoding columns are present in the input DataFrame
+  for col in encoding_cols:
+      if col not in df.columns:
+          df[col] = "Unknown"  # or np.nan, or any placeholder value
+
+# Make sure the type is string/object
+  df[encoding_cols] = df[encoding_cols].astype(str)
+
+# Apply the encoder
+  df[encoding_cols] = encoder.transform(df[encoding_cols])
+
   
   return df
   
