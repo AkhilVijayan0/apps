@@ -2,16 +2,16 @@ import numpy as np
 import pandas as pd
 
 def preprocess_input(df):
-  convert_cols=['ChronicCond_Alzheimer',
-       'ChronicCond_Heartfailure', 'ChronicCond_KidneyDisease',
-       'ChronicCond_Cancer', 'ChronicCond_ObstrPulmonary',
-       'ChronicCond_Depression', 'ChronicCond_Diabetes',
-       'ChronicCond_IschemicHeart', 'ChronicCond_Osteoporasis',
-       'ChronicCond_rheumatoidarthritis', 'ChronicCond_stroke']
-  for i in convert_cols:
-      df[i]=df[i].map({1:0,2:1})
+  # convert_cols=['ChronicCond_Alzheimer',
+  #      'ChronicCond_Heartfailure', 'ChronicCond_KidneyDisease',
+  #      'ChronicCond_Cancer', 'ChronicCond_ObstrPulmonary',
+  #      'ChronicCond_Depression', 'ChronicCond_Diabetes',
+  #      'ChronicCond_IschemicHeart', 'ChronicCond_Osteoporasis',
+  #      'ChronicCond_rheumatoidarthritis', 'ChronicCond_stroke']
+  # for i in convert_cols:
+  #     df[i]=df[i].map({1:0,2:1})
   #Converting RenalDiseaseIndicator to 0 and 1    
-  df['RenalDiseaseIndicator']=df['RenalDiseaseIndicator'].map({'Y':1,'0':0}) 
+  # df['RenalDiseaseIndicator']=df['RenalDiseaseIndicator'].map({'Y':1,'0':0}) 
   df['DOB']=pd.to_datetime(df['DOB']).dt.year
   df['age']=2009-df['DOB']
   df.drop('DOB',axis=1,inplace=True)
