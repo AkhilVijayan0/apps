@@ -21,7 +21,7 @@ def preprocess_input(df):
   df.drop(['ClaimStartDt','ClaimEndDt'],axis=1,inplace=True)
   df['AdmissionDt']=pd.to_datetime(df['AdmissionDt'],errors='coerce') 
   df['DischargeDt']=pd.to_datetime(df['DischargeDt'],errors='coerce')  
-  df['LOS']=(final['DischargeDt']-df['AdmissionDt']).dt.days
+  df['LOS']=(df['DischargeDt']-df['AdmissionDt']).dt.days
   df['LOS'].fillna(0,inplace=True)
   df.drop(['AdmissionDt','DischargeDt'],axis=1,inplace=True)
   
