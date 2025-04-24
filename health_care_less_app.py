@@ -48,7 +48,7 @@ else:
     ClmDiagnosisCode_1 = st.number_input("Enter ClmDiagnosisCode_1")
 
     # Dummy claim_duration until computed in preprocess
-    # claim_duration = 0
+    claim_duration = 0
     # Dieseases
     st.subheader("Diseases")
 
