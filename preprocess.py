@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 from category_encoders import TargetEncoder
 
-encoder = joblib.load('target_encoder.pkl')
+tg_encoder = joblib.load('target_encoder.pkl')
 def preprocess_input(df):
   # convert_cols=['ChronicCond_Alzheimer',
   #      'ChronicCond_Heartfailure', 'ChronicCond_KidneyDisease',
@@ -15,6 +15,9 @@ def preprocess_input(df):
   #     df[i]=df[i].map({1:0,2:1})
   #Converting RenalDiseaseIndicator to 0 and 1    
   # df['RenalDiseaseIndicator']=df['RenalDiseaseIndicator'].map({'Y':1,'0':0}) 
+  encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1']
+  # encoding_cols=['Provider','BeneID','AttendingPhysician']
+  df[encoding_cols]=tg_encoder.transform(df[encoding_cols])
   df['DOB']=pd.to_datetime(df['DOB']).dt.year
   df['age']=2009-df['DOB']
   df.drop('DOB',axis=1,inplace=True)
@@ -30,18 +33,18 @@ def preprocess_input(df):
   # encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1']
   # encoding_cols=['Provider','BeneID','AttendingPhysician']
   # df[encoding_cols]=encoder.transform(df[encoding_cols])
-  encoding_cols = ['Provider', 'BeneID', 'AttendingPhysician', 'ClmDiagnosisCode_1']
+  # encoding_cols = ['Provider', 'BeneID', 'AttendingPhysician', 'ClmDiagnosisCode_1']
 
 # Ensure all encoding columns are present in the input DataFrame
-  for col in encoding_cols:
-      if col not in df.columns:
-          df[col] = "Unknown"  # or np.nan, or any placeholder value
+#   for col in encoding_cols:
+#       if col not in df.columns:
+#           df[col] = "Unknown"  # or np.nan, or any placeholder value
 
-# Make sure the type is string/object
-  df[encoding_cols] = df[encoding_cols].astype(str)
+# # Make sure the type is string/object
+#   df[encoding_cols] = df[encoding_cols].astype(str)
 
-# Apply the encoder
-  df[encoding_cols] = encoder.transform(df[encoding_cols])
+# # Apply the encoder
+#   df[encoding_cols] = encoder.transform(df[encoding_cols])
 
   
   return df
