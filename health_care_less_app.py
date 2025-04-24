@@ -31,33 +31,39 @@ else:
     # Example fields (you can customize this based on your actual columns)
     provider = st.text_input("Enter ProviderID")
     beneficiar = st.text_input("Enter BeneficiaryID")
-    ClaimStartDt = st.text_input("Enter ClaimStartDt")
-    ClaimEndDt = st.text_input("Enter ClaimEndDt")
     amt_reimbursed = st.number_input("Enter claim amount reimbursed")
     phyID = st.text_input("Enter PhysicianID")
-    AdmissionDt = st.text_input("Enter AdmissionDt")
-    DeductibleAmtPaid = st.number_input("Enter DeductibleAmtPaid")
-    DischargeDt = st.text_input("Enter DischargeDt")
-    DiagnosisGroupCode = st.text_input("Enter DiagnosisGroupCode")
-    ClmDiagnosisCode_1 = st.number_input("Enter ClmDiagnosisCode_1")
-    DOB = st.text_input("Enter DOB")
-    Gender = st.number_input("Enter Gender (1-Male, 2-Female)")
-    Race = st.number_input("Enter Race (1-4)")
-    RenalDiseaseIndicator = st.text_input("Enter RenalDiseaseIndicator")
-    State = st.number_input("Enter State number")
+    Gender = st.selectbox("Select Gender (1-Male, 2-Female)", [1, 2])
+    Race = st.selectbox("Select Race", [1, 2, 3, 4])
+    State = st.selectbox("Select State", [1, 2, 3, 4, 5, 6, 7])
     county = st.number_input("Enter County Number")
-   
-    
-    
-    
-    
-    
-    
-    
-    
+    ClaimStartDt = st.text_input("Enter ClaimStartDt")
+    ClaimEndDt = st.text_input("Enter ClaimEndDt")
+    AdmissionDt = st.text_input("Enter AdmissionDt")
+    DischargeDt = st.text_input("Enter DischargeDt")
+    DOB = st.text_input("Enter DOB")
+    RenalDiseaseIndicator = st.selectbox("Select RenalDiseaseIndicator", [0,1])
+    DiagnosisGroupCode = st.text_input("Enter DiagnosisGroupCode")
+    DeductibleAmtPaid = st.number_input("Enter DeductibleAmtPaid")
+    ClmDiagnosisCode_1 = st.number_input("Enter ClmDiagnosisCode_1")
 
     # Dummy claim_duration until computed in preprocess
-    claim_duration = 0  
+    # claim_duration = 0
+    # Dieseases
+    st.subheader("Diseases")
+
+    chronic_alz = st.checkbox("Alzheimer's")
+    chronic_heart = st.checkbox("Heart Failure")
+    chronic_kidney = st.checkbox("Kidney Disease")
+    chronic_cancer = st.checkbox("Cancer")
+    chronic_pulmonary = st.checkbox("Obstructive Pulmonary Disease")
+    chronic_depression = st.checkbox("Depression")
+    chronic_diabetes = st.checkbox("Diabetes")
+    chronic_ischemic = st.checkbox("Ischemic Heart Disease")
+    chronic_osteoporosis = st.checkbox("Osteoporosis")
+    chronic_arthritis = st.checkbox("Rheumatoid Arthritis")
+    chronic_stroke = st.checkbox("Stroke")
+    
 
     # Assemble input into DataFrame
     manual_input = pd.DataFrame({
@@ -80,17 +86,17 @@ else:
         'DeductibleAmtPaid': [DeductibleAmtPaid],
         'ClmDiagnosisCode_1': [ClmDiagnosisCode_1],
         # Default values for chronic conditions
-        'ChronicCond_Alzheimer': [0],
-        'ChronicCond_Heartfailure': [0],
-        'ChronicCond_KidneyDisease': [0],
-        'ChronicCond_Cancer': [0],
-        'ChronicCond_ObstrPulmonary': [0],
-        'ChronicCond_Depression': [0],
-        'ChronicCond_Diabetes': [0],
-        'ChronicCond_IschemicHeart': [0],
-        'ChronicCond_Osteoporasis': [0],
-        'ChronicCond_rheumatoidarthritis': [0],
-        'ChronicCond_stroke': [0],
+        'ChronicCond_Alzheimer': [1 if chronic_alz else 0],
+        'ChronicCond_Heartfailure': [1 if chronic_heart else 0],
+        'ChronicCond_KidneyDisease': [1 if chronic_kidney else 0],
+        'ChronicCond_Cancer': [1 if chronic_cancer else 0],
+        'ChronicCond_ObstrPulmonary': [1 if chronic_pulmonary else 0],
+        'ChronicCond_Depression': [1 if chronic_depression else 0],
+        'ChronicCond_Diabetes': [1 if chronic_diabetes else 0],
+        'ChronicCond_IschemicHeart': [1 if chronic_ischemic else 0],
+        'ChronicCond_Osteoporasis': [1 if chronic_osteoporosis else 0],
+        'ChronicCond_rheumatoidarthritis': [1 if chronic_arthritis else 0],
+        'ChronicCond_stroke': [1 if chronic_stroke else 0],
     })
 
     st.write("Input Summary:", manual_input)
