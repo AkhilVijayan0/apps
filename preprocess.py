@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+encoder = joblib.load('target_encoder.pkl')
 def preprocess_input(df):
   # convert_cols=['ChronicCond_Alzheimer',
   #      'ChronicCond_Heartfailure', 'ChronicCond_KidneyDisease',
@@ -24,6 +25,8 @@ def preprocess_input(df):
   df['LOS']=(df['DischargeDt']-df['AdmissionDt']).dt.days
   df['LOS'].fillna(0,inplace=True)
   df.drop(['AdmissionDt','DischargeDt'],axis=1,inplace=True)
+  encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1','DiagnosisGroupCode']
+  df[encoding_cols]=encoder.transform(df[encoding_cols])
   
   return df
   
