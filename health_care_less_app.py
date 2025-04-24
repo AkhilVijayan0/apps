@@ -31,21 +31,30 @@ else:
     # Example fields (you can customize this based on your actual columns)
     provider = st.text_input("Enter ProviderID")
     beneficiar = st.text_input("Enter BeneficiaryID")
-    amt_reimbursed = st.number_input("Enter claim amount reimbursed")
-    phyID = st.text_input("Enter PhysicianID")
-    Gender = st.number_input("Enter Gender (1-Male, 2-Female)")
-    Race = st.number_input("Enter Race (1-4)")
-    State = st.number_input("Enter State number")
-    county = st.number_input("Enter County Number")
     ClaimStartDt = st.text_input("Enter ClaimStartDt")
     ClaimEndDt = st.text_input("Enter ClaimEndDt")
+    amt_reimbursed = st.number_input("Enter claim amount reimbursed")
+    phyID = st.text_input("Enter PhysicianID")
     AdmissionDt = st.text_input("Enter AdmissionDt")
-    DischargeDt = st.text_input("Enter DischargeDt")
-    DOB = st.text_input("Enter DOB")
-    RenalDiseaseIndicator = st.text_input("Enter RenalDiseaseIndicator")
-    DiagnosisGroupCode = st.text_input("Enter DiagnosisGroupCode")
     DeductibleAmtPaid = st.number_input("Enter DeductibleAmtPaid")
+    DischargeDt = st.text_input("Enter DischargeDt")
+    DiagnosisGroupCode = st.text_input("Enter DiagnosisGroupCode")
     ClmDiagnosisCode_1 = st.number_input("Enter ClmDiagnosisCode_1")
+    DOB = st.text_input("Enter DOB")
+    Gender = st.number_input("Enter Gender (1-Male, 2-Female)")
+    Race = st.number_input("Enter Race (1-4)")
+    RenalDiseaseIndicator = st.text_input("Enter RenalDiseaseIndicator")
+    State = st.number_input("Enter State number")
+    county = st.number_input("Enter County Number")
+   
+    
+    
+    
+    
+    
+    
+    
+    
 
     # Dummy claim_duration until computed in preprocess
     claim_duration = 0  
