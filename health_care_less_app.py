@@ -68,9 +68,9 @@ else:
     # Assemble input into DataFrame
     manual_input = pd.DataFrame({
         'Provider': [provider],
-        'BeneficiaryID': [beneficiar],
-        'Claim_Reimbursed': [amt_reimbursed],
-        'PhysicianID': [phyID],
+        'BeneID': [beneficiar],
+        'InscClaimAmtReimbursed': [amt_reimbursed],
+        'AttendingPhysician': [phyID],
         'Gender': [Gender],
         'Race': [Race],
         'State': [State],
