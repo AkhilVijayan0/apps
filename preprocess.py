@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from category_encoders import TargetEncoder
 
 encoder = joblib.load('target_encoder.pkl')
 def preprocess_input(df):
