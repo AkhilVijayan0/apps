@@ -29,26 +29,29 @@ else:
     st.subheader("Enter claim details manually")
 
     # Example fields (you can customize this based on your actual columns)
-    provider = st.text_input("Enter ProviderID")
-    beneficiar = st.text_input("Enter BeneficiaryID")
-    amt_reimbursed = st.number_input("Enter claim amount reimbursed")
-    phyID = st.text_input("Enter PhysicianID")
-    Gender = st.selectbox("Select Gender (1-Male, 2-Female)", [1, 2])
-    Race = st.selectbox("Select Race", [1, 2, 3, 4])
-    State = st.selectbox("Select State", [1, 2, 3, 4, 5, 6, 7])
-    county = st.number_input("Enter County Number")
+    provider = st.text_input("Enter ProviderID (Eg:PRV51002)")
+    beneficiar = st.text_input("Enter BeneficiaryID (Eg:BENE14252)")
     ClaimStartDt = st.text_input("Enter ClaimStartDt")
     ClaimEndDt = st.text_input("Enter ClaimEndDt")
+    amt_reimbursed = st.number_input("Enter claim amount reimbursed")
+    phyID = st.text_input("Enter Attending PhysicianID")
     AdmissionDt = st.text_input("Enter AdmissionDt")
-    DischargeDt = st.text_input("Enter DischargeDt")
-    DOB = st.text_input("Enter DOB")
-    RenalDiseaseIndicator = st.selectbox("Select RenalDiseaseIndicator", [0,1])
-    DiagnosisGroupCode = st.text_input("Enter DiagnosisGroupCode")
     DeductibleAmtPaid = st.number_input("Enter DeductibleAmtPaid")
+    DischargeDt = st.text_input("Enter DischargeDt")
     ClmDiagnosisCode_1 = st.number_input("Enter ClmDiagnosisCode_1")
+    DOB = st.text_input("Enter DOB")
+    Gender = st.selectbox("Select Gender (1-Male, 2-Female)", [1, 2])
+    Race = st.selectbox("Select Race", [1, 2, 3, 4])
+    RenalDiseaseIndicator = st.selectbox("Select RenalDiseaseIndicator", [0,1])
+    State = st.selectbox("Select State", [1, 2, 3, 4, 5, 6, 7])
+    county = st.number_input("Enter County Number")
+    # RenalDiseaseIndicator = st.selectbox("Select RenalDiseaseIndicator", [0,1])
+    # DiagnosisGroupCode = st.text_input("Enter DiagnosisGroupCode")
+    # DeductibleAmtPaid = st.number_input("Enter DeductibleAmtPaid")
+    
 
     # Dummy claim_duration until computed in preprocess
-    claim_duration = 0
+    # claim_duration = 0
     # Dieseases
     st.subheader("Diseases")
 
@@ -71,8 +74,11 @@ else:
         'BeneID': [beneficiar],
         'InscClaimAmtReimbursed': [amt_reimbursed],
         'AttendingPhysician': [phyID],
+        'DeductibleAmtPaid': [DeductibleAmtPaid],
+        'ClmDiagnosisCode_1': [ClmDiagnosisCode_1],
         'Gender': [Gender],
         'Race': [Race],
+        'RenalDiseaseIndicator': [RenalDiseaseIndicator],
         'State': [State],
         'County': [county],
         'ClaimStartDt': [ClaimStartDt],
@@ -80,11 +86,10 @@ else:
         'AdmissionDt': [AdmissionDt],
         'DischargeDt': [DischargeDt],
         'DOB': [DOB],
-        'Claim_Duration': [claim_duration],
-        'RenalDiseaseIndicator': [RenalDiseaseIndicator],
-        'DiagnosisGroupCode': [DiagnosisGroupCode],
-        'DeductibleAmtPaid': [DeductibleAmtPaid],
-        'ClmDiagnosisCode_1': [ClmDiagnosisCode_1],
+        # 'Claim_Duration': [claim_duration],
+        # 'RenalDiseaseIndicator': [RenalDiseaseIndicator],
+        # 'DiagnosisGroupCode': [DiagnosisGroupCode],
+        
         # Default values for chronic conditions
         'ChronicCond_Alzheimer': [1 if chronic_alz else 0],
         'ChronicCond_Heartfailure': [1 if chronic_heart else 0],
