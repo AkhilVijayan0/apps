@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from preprocess import preprocess_input
+# from preprocess import preprocess_input
 
 # Load the model
 model = joblib.load('Healthcare_fraud_detection_lessed.pkl')
@@ -18,7 +18,7 @@ if input_mode == "Upload CSV file":
         st.write("Raw input data", data)
 
         # Preprocess
-        processed_data = preprocess_input(data)
+        # processed_data = preprocess_input(data)
 
         if st.button("Predict Fraud"):
             predictions = model.predict(processed_data)
@@ -107,7 +107,7 @@ else:
     st.write("Input Summary:", manual_input)
 
     if st.button("Predict Fraud (Manual)"):
-        processed_manual = preprocess_input(manual_input)
+        # processed_manual = preprocess_input(manual_input)
         predictions = model.predict(processed_manual)
         st.write("Fraud Prediction:")
         st.write(predictions)
