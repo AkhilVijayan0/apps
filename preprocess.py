@@ -17,7 +17,7 @@ def preprocess_input(df):
   # df['RenalDiseaseIndicator']=df['RenalDiseaseIndicator'].map({'Y':1,'0':0}) 
   encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1']
   # encoding_cols=['Provider','BeneID','AttendingPhysician']
-  df[encoding_cols]=tg_encoder.transform(df[encoding_cols])
+  df.loc[:,encoding_cols]=tg_encoder.transform(df[encoding_cols])
   df['DOB']=pd.to_datetime(df['DOB']).dt.year
   df['age']=2009-df['DOB']
   df.drop('DOB',axis=1,inplace=True)
