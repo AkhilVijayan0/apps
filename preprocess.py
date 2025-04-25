@@ -5,18 +5,9 @@ from category_encoders import TargetEncoder
 
 tg_encoder = joblib.load('target_encoder.pkl')
 def preprocess_input(df):
-  # convert_cols=['ChronicCond_Alzheimer',
-  #      'ChronicCond_Heartfailure', 'ChronicCond_KidneyDisease',
-  #      'ChronicCond_Cancer', 'ChronicCond_ObstrPulmonary',
-  #      'ChronicCond_Depression', 'ChronicCond_Diabetes',
-  #      'ChronicCond_IschemicHeart', 'ChronicCond_Osteoporasis',
-  #      'ChronicCond_rheumatoidarthritis', 'ChronicCond_stroke']
-  # for i in convert_cols:
-  #     df[i]=df[i].map({1:0,2:1})
-  #Converting RenalDiseaseIndicator to 0 and 1    
-  # df['RenalDiseaseIndicator']=df['RenalDiseaseIndicator'].map({'Y':1,'0':0}) 
+ 
   encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1']
-  # encoding_cols=['Provider','BeneID','AttendingPhysician']
+  
   df.loc[:,encoding_cols]=tg_encoder.transform(df[encoding_cols])
   df['DOB']=pd.to_datetime(df['DOB']).dt.year
   df['age']=2009-df['DOB']
@@ -30,21 +21,7 @@ def preprocess_input(df):
   df['LOS']=(df['DischargeDt']-df['AdmissionDt']).dt.days
   df['LOS'].fillna(0,inplace=True)
   df.drop(['AdmissionDt','DischargeDt'],axis=1,inplace=True)
-  # encoding_cols=['Provider','BeneID','AttendingPhysician','ClmDiagnosisCode_1']
-  # encoding_cols=['Provider','BeneID','AttendingPhysician']
-  # df[encoding_cols]=encoder.transform(df[encoding_cols])
-  # encoding_cols = ['Provider', 'BeneID', 'AttendingPhysician', 'ClmDiagnosisCode_1']
 
-# Ensure all encoding columns are present in the input DataFrame
-#   for col in encoding_cols:
-#       if col not in df.columns:
-#           df[col] = "Unknown"  # or np.nan, or any placeholder value
-
-# # Make sure the type is string/object
-#   df[encoding_cols] = df[encoding_cols].astype(str)
-
-# # Apply the encoder
-#   df[encoding_cols] = encoder.transform(df[encoding_cols])
 
   
   return df
