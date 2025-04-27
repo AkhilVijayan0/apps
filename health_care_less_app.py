@@ -25,10 +25,8 @@ if input_mode == "Upload CSV file":
             predictions = model.predict(processed_data)
             prediction_labels = ["Fraud" if pred == 1 else "Not Fraud" for pred in predictions]
             
-            st.write("Fraud Predictions:")
-            
-            result_df = data.copy()
-            result_df['Fraud Prediction'] = prediction_labels
+            # Create a DataFrame with only the predictions
+            result_df = pd.DataFrame({'Fraud Prediction': prediction_labels})
             st.dataframe(result_df)
 
 else:
