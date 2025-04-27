@@ -115,8 +115,7 @@ else:
         'ChronicCond_rheumatoidarthritis': [1 if chronic_arthritis else 0],
         'ChronicCond_stroke': [1 if chronic_stroke else 0],
     })
-
- st.write("Input Summary:", manual_input)
+st.write("Input Summary:", manual_input)
 
     if st.button("Predict Fraud (Manual)"):
         processed_manual = preprocess_input(manual_input)
