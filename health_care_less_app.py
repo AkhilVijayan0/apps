@@ -108,8 +108,16 @@ else:
 
     st.write("Input Summary:", manual_input)
 
-    if st.button("Predict Fraud (Manual)"):
-        processed_manual = preprocess_input(manual_input)
-        predictions = model.predict(processed_manual)
-        st.write("Fraud Prediction:")
-        st.write(predictions)
+if st.button("Predict Fraud (Manual)"):
+    processed_manual = preprocess_input(manual_input)
+    predictions = model.predict(processed_manual)
+    
+    st.write("Fraud Prediction:")
+    
+    # Loop through predictions and display nicely
+    for pred in predictions:
+        if pred == 1:
+            st.success("Fraud")   # Green box for Fraud
+        else:
+            st.info("Not Fraud")  # Blue box for Not Fraud
+
