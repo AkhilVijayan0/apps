@@ -23,8 +23,18 @@ if input_mode == "Upload CSV file":
 
         if st.button("Predict Fraud"):
             predictions = model.predict(processed_data)
+            
+            # Convert predictions to readable text
+            prediction_labels = ["Fraud" if pred == 1 else "Not Fraud" for pred in predictions]
+            
             st.write("Fraud Predictions:")
-            st.write(predictions)
+            
+            # Show predictions nicely along with the original data
+            result_df = data.copy()
+            result_df['Fraud Prediction'] = prediction_labels
+            
+            st.dataframe(result_df)
+
 
 
 else:
@@ -106,18 +116,11 @@ else:
         'ChronicCond_stroke': [1 if chronic_stroke else 0],
     })
 
-    st.write("Input Summary:", manual_input)
+ st.write("Input Summary:", manual_input)
 
-if st.button("Predict Fraud (Manual)"):
-    processed_manual = preprocess_input(manual_input)
-    predictions = model.predict(processed_manual)
-    
-    st.write("Fraud Prediction:")
-    
-    # Loop through predictions and display nicely
-    for pred in predictions:
-        if pred == 1:
-            st.success("Fraud")   # Green box for Fraud
-        else:
-            st.info("Not Fraud")  # Blue box for Not Fraud
+    if st.button("Predict Fraud (Manual)"):
+        processed_manual = preprocess_input(manual_input)
+        predictions = model.predict(processed_manual)
+        st.write("Fraud Prediction:")
+        st.write(predictions)
 
