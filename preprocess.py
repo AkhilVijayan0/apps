@@ -39,6 +39,6 @@ def preprocess_input(df):
       df['LOS'].fillna(0, inplace=True)
   else:
       df['LOS'] = 0
-  df.drop(columns=['AdmissionDt', 'DischargeDt'], errors='ignore', inplace=True)
+  df.drop(columns=['AdmissionDt', 'DischargeDt','ClaimID'], errors='ignore', inplace=True)
 
   return df
