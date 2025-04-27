@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 from category_encoders import TargetEncoder
 
-tg_encoder = joblib.load('target_encoder.pkl')
+encoder = joblib.load('target_encoder.pkl')
 def preprocess_input(df):
 
   encods = ['Provider', 'BeneID', 'AttendingPhysician', 'ClmDiagnosisCode_1']
