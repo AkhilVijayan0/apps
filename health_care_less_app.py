@@ -23,26 +23,20 @@ if input_mode == "Upload CSV file":
 
         if st.button("Predict Fraud"):
             predictions = model.predict(processed_data)
-            
-            # Convert predictions to readable text
             prediction_labels = ["Fraud" if pred == 1 else "Not Fraud" for pred in predictions]
             
             st.write("Fraud Predictions:")
             
-            # Show predictions nicely along with the original data
             result_df = data.copy()
             result_df['Fraud Prediction'] = prediction_labels
-            
             st.dataframe(result_df)
-
-
 
 else:
     st.subheader("Enter claim details manually")
 
-    # Example fields (you can customize this based on your actual columns)
-    provider = st.text_input("Enter ProviderID (Eg:PRV51002)")
-    beneficiar = st.text_input("Enter BeneficiaryID (Eg:BENE14252)")
+    # Form fields
+    provider = st.text_input("Enter ProviderID (Eg: PRV51002)")
+    beneficiar = st.text_input("Enter BeneficiaryID (Eg: BENE14252)")
     ClaimStartDt = st.text_input("Enter ClaimStartDt")
     ClaimEndDt = st.text_input("Enter ClaimEndDt")
     amt_reimbursed = st.number_input("Enter claim amount reimbursed")
@@ -54,19 +48,11 @@ else:
     DOB = st.text_input("Enter DOB")
     Gender = st.selectbox("Select Gender (1-Male, 2-Female)", [1, 2])
     Race = st.selectbox("Select Race", [1, 2, 3, 4])
-    RenalDiseaseIndicator = st.selectbox("Select RenalDiseaseIndicator", [0,1])
+    RenalDiseaseIndicator = st.selectbox("Select RenalDiseaseIndicator", [0, 1])
     State = st.selectbox("Select State", [1, 2, 3, 4, 5, 6, 7])
     county = st.number_input("Enter County Number")
-    # RenalDiseaseIndicator = st.selectbox("Select RenalDiseaseIndicator", [0,1])
-    # DiagnosisGroupCode = st.text_input("Enter DiagnosisGroupCode")
-    # DeductibleAmtPaid = st.number_input("Enter DeductibleAmtPaid")
-    
 
-    # Dummy claim_duration until computed in preprocess
-    # claim_duration = 0
-    # Dieseases
     st.subheader("Diseases")
-
     chronic_alz = st.checkbox("Alzheimer's")
     chronic_heart = st.checkbox("Heart Failure")
     chronic_kidney = st.checkbox("Kidney Disease")
@@ -79,8 +65,6 @@ else:
     chronic_arthritis = st.checkbox("Rheumatoid Arthritis")
     chronic_stroke = st.checkbox("Stroke")
     
-
-    # Assemble input into DataFrame
     manual_input = pd.DataFrame({
         'Provider': [provider],
         'BeneID': [beneficiar],
@@ -98,11 +82,6 @@ else:
         'AdmissionDt': [AdmissionDt],
         'DischargeDt': [DischargeDt],
         'DOB': [DOB],
-        # 'Claim_Duration': [claim_duration],
-        # 'RenalDiseaseIndicator': [RenalDiseaseIndicator],
-        # 'DiagnosisGroupCode': [DiagnosisGroupCode],
-        
-        # Default values for chronic conditions
         'ChronicCond_Alzheimer': [1 if chronic_alz else 0],
         'ChronicCond_Heartfailure': [1 if chronic_heart else 0],
         'ChronicCond_KidneyDisease': [1 if chronic_kidney else 0],
@@ -115,11 +94,14 @@ else:
         'ChronicCond_rheumatoidarthritis': [1 if chronic_arthritis else 0],
         'ChronicCond_stroke': [1 if chronic_stroke else 0],
     })
-st.write("Input Summary:", manual_input)
 
-if st.button("Predict Fraud (Manual)"):
-    processed_manual = preprocess_input(manual_input)
-    predictions = model.predict(processed_manual)
-    st.write("Fraud Prediction:")
-    st.write(predictions)
+    st.write("Input Summary:", manual_input)
 
+    if st.button("Predict Fraud (Manual)"):
+        processed_manual = preprocess_input(manual_input)
+        predictions = model.predict(processed_manual)
+        
+        prediction_text = "Fraud" if predictions[0] == 1 else "Not Fraud"
+        
+        st.write("Fraud Prediction:")
+        st.success(prediction_text)  # Green success message
