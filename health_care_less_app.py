@@ -117,9 +117,9 @@ else:
     })
 st.write("Input Summary:", manual_input)
 
-    if st.button("Predict Fraud (Manual)"):
-        processed_manual = preprocess_input(manual_input)
-        predictions = model.predict(processed_manual)
-        st.write("Fraud Prediction:")
-        st.write(predictions)
+if st.button("Predict Fraud (Manual)"):
+    processed_manual = preprocess_input(manual_input)
+    predictions = model.predict(processed_manual)
+    st.write("Fraud Prediction:")
+    st.write(predictions)
 
