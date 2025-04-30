@@ -30,7 +30,7 @@ def preprocess_input(df):
   else:
       df['clm_duration'] = 0
   df.drop(columns=['ClaimStartDt', 'ClaimEndDt'], errors='ignore', inplace=True)
-  df['RenalDiseaseIndicator']=df['RenalDiseaseIndicator'].map({'Y':1,'0':0})   
+  # df['RenalDiseaseIndicator']=df['RenalDiseaseIndicator'].map({'Y':1,'0':0})   
   # Process Admission and Discharge dates
   if 'AdmissionDt' in df.columns and 'DischargeDt' in df.columns:
       df['AdmissionDt'] = pd.to_datetime(df['AdmissionDt'], errors='coerce')
