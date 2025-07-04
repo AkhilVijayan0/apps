@@ -6,3 +6,4 @@ numpy
 xgboost
 imblearn
 category_encoders
+scipy==1.10.1
